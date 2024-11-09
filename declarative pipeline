@@ -1,0 +1,40 @@
+pipeline {
+    agent any  
+
+    environment { 
+        // Set environment variables
+        MY_VAR = 'some_value'
+    }
+
+    stages {
+        stage('Build') { 
+            steps {
+                echo 'Building...'
+                // Add your build commands here (e.g., mvn, gradle, npm, etc.)
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Add your test commands here (e.g., mvn test, pytest, etc.)
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Add your deployment steps here (e.g., deploying to a staging server)
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'The pipeline completed successfully.'
+        }
+        failure {
+            echo 'The pipeline failed.'
+        }
+    }
+}
