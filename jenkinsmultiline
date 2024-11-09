@@ -6,13 +6,18 @@ pipeline {
         DOCKER_REGISTRY = 'my-docker-registry'
     }
 
-    stages {
-        stage('Checkout') {
+   stages {
+        stage('checkout') {
             steps {
-                // Clone the repository from Git
-                git 'https://github.com/your-username/multi-config-project.git'
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']], // or specify another branch
+                    userRemoteConfigs: [[url: 'https://github.com/sibilucky/pipelines-jenkins.git']]
+                ])
             }
         }
+    }   
+
 
         stage('Build and Deploy Development') {
             steps {
