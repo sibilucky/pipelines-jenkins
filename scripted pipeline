@@ -4,7 +4,11 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git 'https://github.com/sibilucky/pipelines-jenkins.git'
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']], // or specify another branch
+                    userRemoteConfigs: [[url: 'https://github.com/sibilucky/pipelines-jenkins.git']]
+                ])
             }
         }
     }   
